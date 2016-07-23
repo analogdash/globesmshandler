@@ -4,9 +4,9 @@ $obj=file_get_contents('php://input');
 
 $value = json_decode($obj,true);
 
-$columns = implode(", ",array_keys($value["inboundSMSMessageList"]["inboundSMSMessage"]));
+$columns = implode(", ",array_keys($value["inboundSMSMessageList"]["inboundSMSMessage"][0]));
 
-$escaped_values = array_map('mysql_real_escape_string', array_values($value["inboundSMSMessageList"]["inboundSMSMessage"]));
+$escaped_values = array_map('mysql_real_escape_string', array_values($value["inboundSMSMessageList"]["inboundSMSMessage"][0]));
 $values  = implode(", ", $escaped_values);
 
 $dateTime = $value["inboundSMSMessageList"]["inboundSMSMessage"]["dateTime"];
