@@ -1,5 +1,7 @@
 <?php
 
+echo 'php opened';
+
 $value["outboundSMSMessageRequest"]["clientCorrelator"] = "123456";
 $value["outboundSMSMessageRequest"]["senderAddress"] = "tel:8839";
 $value["outboundSMSMessageRequest"]["outboundSMSTextMessage"]["message"] = "Hello World";
@@ -7,16 +9,23 @@ $value["outboundSMSMessageRequest"]["Address"][0] = "tel:+639776519749";
 
 $post = json_encode($value);
 
+echo $post."<br>";
+
 #$url = "https://devapi.globelabs.com.ph/smsmessaging/v1/outbound/8839/requests?access_token=69PVXqlqgQN5Ww_nd2KcKEnloEI_-Zt0wGLILZFKYBE"
 
-$url = "https://requestb.in/16v0czb1?access_token=69PVXqlqgQN5Ww_nd2KcKEnloEI_-Zt0wGLILZFKYBE"
+$url = "https://requestb.in/16v0czb1?access_token=69PVXqlqgQN5Ww_nd2KcKEnloEI_-Zt0wGLILZFKYBE";
 
 $ch = curl_init($url);
   curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");  
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
   curl_setopt($ch, CURLOPT_POSTFIELDS,$post);
   curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); 
+
+echo 'CH Set <br>';
+
 $response  = curl_exec($ch);
+
+echo 'curl executed<br>';
 
 if($response === false){
     echo 'Curl error: ' . curl_error($ch);
