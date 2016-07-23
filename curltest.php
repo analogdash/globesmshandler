@@ -1,34 +1,32 @@
 <?php
-function nxs_cURLTest($url, $msg, $testText){  
-  $ch = curl_init(); 
-  curl_setopt($ch, CURLOPT_URL, $url); 
-  curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36"); 
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-  curl_setopt($ch, CURLOPT_TIMEOUT, 10); 
-  curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
-  $response = curl_exec($ch); 
-  $errmsg = curl_error($ch); 
-  $cInfo = curl_getinfo($ch); 
-  curl_close($ch); 
-  echo "Testing ... ".$url." - ".$cInfo['url']."<br />";
-  if (stripos($response, $testText)!==false) 
-    echo "....".$msg." - OK<br />"; 
-  else 
-  { 
-    echo "....<b style='color:red;'>".$msg." - Problem</b><br /><pre>"; 
-    print_r($errmsg); 
-    print_r($cInfo); 
-    print_r(htmlentities($response)); 
-    echo "</pre>There is a problem with cURL. You need to contact your server admin or hosting provider.";
-  }
+
+$service_url = 'https://requestb.in/16v0czb1?access_token=69PVXqlqgQN5Ww_nd2KcKEnloEI_-Zt0wGLILZFKYBE';
+$curl = curl_init($service_url);
+$curl_post_data = array(
+        'message' => 'test message',
+        'useridentifier' => 'agent@example.com',
+        'department' => 'departmentId001',
+        'subject' => 'My first conversation',
+        'recipient' => 'recipient@example.com',
+        'apikey' => 'key001'
+);
+
+
+
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl, CURLOPT_POST, true);
+curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
+$curl_response = curl_exec($curl);
+if ($curl_response === false) {
+    $info = curl_getinfo($curl);
+    curl_close($curl);
+    die('error occured during curl exec. Additioanl info: ' . var_export($info));
 }
-
-  nxs_cURLTest("http://www.nextscripts.com/", "HTTPS to NXS", "Social Networks");
-  nxs_cURLTest("http://www.google.com/intl/en/contact/", "HTTP to Google", "Mountain View, CA");
-  nxs_cURLTest("https://www.google.com/intl/en/contact/", "HTTPS to Google", "Mountain View, CA");
-  nxs_cURLTest("https://www.facebook.com/", "HTTPS to Facebook", 'id="facebook"');
-  nxs_cURLTest("https://graph.facebook.com/", "HTTPS to API (Graph) Facebook", 'get');  
-  nxs_cURLTest("https://www.linkedin.com/nhome/", "HTTPS to LinkedIn", 'rel="canonical" href="https://www.linkedin.com/');
-  nxs_cURLTest("https://requestb.in/16v0czb1", "Requestbin test", 'Test Text');
-
-  ?>
+curl_close($curl);
+$decoded = json_decode($curl_response);
+if (isset($decoded->response->status) && $decoded->response->status == 'ERROR') {
+    die('error occured: ' . $decoded->response->errormessage);
+}
+echo 'response ok!';
+var_export($decoded->response);
+?>
