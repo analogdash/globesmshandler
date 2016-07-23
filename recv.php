@@ -28,7 +28,7 @@ $lat = $locarray["terminalLocationList"]["terminalLocation"]["currentLocation"][
 $resolveurl = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".$lat.",".$long."&key=AIzaSyBCO1XKQt8S0AO6vebjeK2Uyrf_E27V6RE";
 $resolvejson = file_get_contents($resolveurl);
 $resolvearray = json_decode($resolvejson, true);
-$currentloc = $resolvearray["results"]["formatted_address"];
+$currentloc = $resolvearray["results"][0]["formatted_address"];
 
 $textreply = "You are at ".$currentloc;
 
