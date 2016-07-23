@@ -2,13 +2,13 @@
 
 $value = json_decode(file_get_contents('php://input'),true);
 
-$dateTime = strtotime($value["inboundSMSMessageList"]["inboundSMSMessage"][0]["dateTime"]);
+$dateTime = $value["inboundSMSMessageList"]["inboundSMSMessage"][0]["dateTime"];
 $message = $value["inboundSMSMessageList"]["inboundSMSMessage"][0]["message"];
 $senderAddress = $value["inboundSMSMessageList"]["inboundSMSMessage"][0]["senderAddress"];
 
 $link = mysqli_connect('localhost','root','rootpower','globesmshandler');
 
-$query = "INSERT INTO kaways (timestomp, sender, message) VALUES ('".$dateTime."', '".$message."', '".$senderAddress."');";
+$query = "INSERT INTO kaways (timmay, sender, message) VALUES ('".$dateTime."', '".$message."', '".$senderAddress."');";
 
 mysqli_query($link, $query);
 
