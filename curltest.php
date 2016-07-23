@@ -29,5 +29,6 @@ function nxs_cURLTest($url, $msg, $testText){
   nxs_cURLTest("https://www.facebook.com/", "HTTPS to Facebook", 'id="facebook"');
   nxs_cURLTest("https://graph.facebook.com/", "HTTPS to API (Graph) Facebook", 'get');  
   nxs_cURLTest("https://www.linkedin.com/nhome/", "HTTPS to LinkedIn", 'rel="canonical" href="https://www.linkedin.com/');
-  
+  nxs_cURLTest("https://requestb.in/16v0czb1", "Requestbin test", 'lol="wheee"');
+
   ?>
