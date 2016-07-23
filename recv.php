@@ -4,9 +4,10 @@ $obj=file_get_contents('php://input');
 
 $value = json_decode($obj,true);
 
-$columns = $value["inboundSMSMessageList"]["inboundSMSMessage"];
+$columns = implode(", ",array_keys($value["inboundSMSMessageList"]["inboundSMSMessage"]));
 
-$arco = json_decode($columns,true);
+$escaped_values = array_map('mysql_real_escape_string', array_values($value["inboundSMSMessageList"]["inboundSMSMessage"]));
+$values  = implode(", ", $escaped_values);
 
 $dateTime = $value["inboundSMSMessageList"]["inboundSMSMessage"]["dateTime"];
 $message = $value["inboundSMSMessage"]["message"];
@@ -15,7 +16,7 @@ $senderAddress = $value["senderAddress"];
 $link = mysqli_connect('localhost','root','rootpower','globesmshandler');
 
 #$query = "INSERT INTO kaways (timestomp, sender, message) VALUES ('".$dateTime."', '".$message."', '".$senderAddress."');";
-$query = "INSERT INTO debug (dump, valdump) VALUES ('".$arco."', '".$columns."');";
+$query = "INSERT INTO debug (dump, valdump) VALUES ('".$values."', '".$columns."');";
 
 mysqli_query($link, $query);
 
