@@ -51,6 +51,13 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 );                                                                                                                   
                                                                                                                      
   $result = curl_exec($ch); 
+
+$query = "INSERT INTO kaways (timberr, sender, message) VALUES ('".$dateTime."', '".$senderAddress."', '".$message."');";
+mysqli_query($link, $query);
+mysqli_close();
+
+
+
 mysqli_close();
   ## END send stuff
 
@@ -59,9 +66,7 @@ mysqli_close();
 
 
 /*
-$query = "INSERT INTO kaways (timberr, sender, message) VALUES ('".$shedcode."', '".$senderAddress."', '".$message."');";
-mysqli_query($link, $query);
-mysqli_close();
+
 */
 
 ?>
