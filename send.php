@@ -1,6 +1,6 @@
 <?php
 
-$value["outboundSMSMessageRequest"]["clientCorrelator"] = "123456";
+$value["outboundSMSMessageRequest"]["clientCorrelator"] = "282828";
 $value["outboundSMSMessageRequest"]["senderAddress"] = "tel:8839";
 $value["outboundSMSMessageRequest"]["outboundSMSTextMessage"]["message"] = "Hello again world!";
 $value["outboundSMSMessageRequest"]["Address"][0] = "tel:+639776519749";
