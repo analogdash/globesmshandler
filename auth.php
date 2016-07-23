@@ -20,9 +20,9 @@ if(isset($_GET["access_token"])){
 	$subnum = $unsub["unsubscribed"]["subscriber_number"];
 
 
-	$query = "DELETE FROM users WHERE subscriber_number=".$subnum.;";
+	$query = "DELETE FROM users WHERE subscriber_number=".$subnum.";";
 	mysqli_query($link, $query);
-
+	echo 'IF YOU SEE THIS, YOU BROKE EVERYTHING';
 
 }
 
