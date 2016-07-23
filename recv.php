@@ -1,11 +1,10 @@
-<?php
-
+"<?php
 
 ## KAWAY Globe API handler
 ## By Dash Castellano
 ## a single PHP file that does everything because hackathon
 ## activated by sending an SMS to app short code
-
+$fourdigitshortcode = "9331"; #used by Globe API
 
 # Parsing json like C programmer
 $inbound = json_decode(file_get_contents('php://input'),true);
@@ -54,26 +53,26 @@ if($break[0] = "whereami"){ #BONUS FEATURE, text 'whereami' to get current addre
 
 
 
+
+
 	if (0/*POST TO BACK END SUCCESS*/){
 			$textreply = "Kawaii! with shed code ".$shedcode;
 	} else {
 		$textreply = "Push to backend failed!";
 	}
-} /*else if (0){ #KAWAY WAS SUCCESSFUL
-	$textreply = "Kawaii!";
-}*/
+}
 
 ## SEND STUFF
 
 # Writing JSON like a C programmer
-##$n["outboundSMSMessageRequest"]["clientCorrelator"] = "888";
+#$n["outboundSMSMessageRequest"]["clientCorrelator"] = ""; #this is for retrying a PUSH without sending the message twice
 $outbound["outboundSMSMessageRequest"]["senderAddress"] = "tel:8839";
 $outbound["outboundSMSMessageRequest"]["outboundSMSTextMessage"]["message"] = $textreply;
 $outbound["outboundSMSMessageRequest"]["address"][0] = $senderAddress;
 
 $payload = json_encode($outbound);
 
-$url = "https://devapi.globelabs.com.ph/smsmessaging/v1/outbound/9331/requests?access_token=".$authtoken;
+$url = "https://devapi.globelabs.com.ph/smsmessaging/v1/outbound/".$fourdigitshortcode."/requests?access_token=".$authtoken;
 #$url = "https://requestb.in/16v0czb1?access_token=".$authtoken; # This is for testing
 
 $ch = curl_init($url);
