@@ -15,14 +15,12 @@ if(isset($_GET["access_token"])){
 	mysqli_query($link, $query);
 
 
-} else {
+} else { #ADD CONDITION
 	$unsub = json_decode(file_get_contents('php://input'),true);
-	$subnum = $unsub["unsubscribed"]["subscriber_number"];
+	$deadtoken = $unsub["unsubscribed"]["access_token"];
 
-
-	$query = "DELETE FROM users WHERE subscriber_number=".$subnum.";";
+	$query = "DELETE FROM users WHERE access_token=".$deadtoken.";";
 	mysqli_query($link, $query);
-	echo 'IF YOU SEE THIS, YOU BROKE EVERYTHING';
 
 }
 
