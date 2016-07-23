@@ -3,7 +3,7 @@
 $value["outboundSMSMessageRequest"]["clientCorrelator"] = "123456";
 $value["outboundSMSMessageRequest"]["senderAddress"] = "tel:8839";
 $value["outboundSMSMessageRequest"]["outboundSMSTextMessage"]["message"] = "Hello World";
-$value["outboundSMSMessageRequest"]["Address"] = "tel:+639776519749";
+$value["outboundSMSMessageRequest"]["Address"][0] = "tel:+639776519749";
 
 $payload = json_encode($value);
 
