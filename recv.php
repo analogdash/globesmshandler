@@ -6,24 +6,24 @@ $dateTime = $inbound["inboundSMSMessageList"]["inboundSMSMessage"][0]["dateTime"
 $message = $inbound["inboundSMSMessageList"]["inboundSMSMessage"][0]["message"];
 $senderAddress = $inbound["inboundSMSMessageList"]["inboundSMSMessage"][0]["senderAddress"];
 
-/*
+
 
 $break = explode(" ",$message);
-$shedcode = $break[1];
 
 if($break[0] != "KAWAY"){
 	$textreply = "Invalid command. Text KAWAY, space, followed by a waiting shed code.";
-} else if (1) { #SOME TEST ABOUT VALIDITY OF SHED CODE
-	$textreply = "Invalid shed code. Please use a valide shed code.";
-} else if (0) { #SOME TEST ABOUT UNSUCCESSFUL BACK END THING
-	$textreply = "Kaway failed, please try again.";
-} else if (0){ #KAWAY WAS SUCCESSFUL
+} else if ($break[1]) { #SOME TEST ABOUT VALIDITY OF SHED CODE
+	$textreply = "Don't forget the shed code.";
+} else if (true) { #SOME TEST ABOUT UNSUCCESSFUL BACK END THING
+	$shedcode = $break[1];
+	$textreply = "Kaway received with shed code ".$shedcode;
+} /*else if (0){ #KAWAY WAS SUCCESSFUL
 	$textreply = "Kawaii!";
-}
-*/
+}*/
+
 ## SEND STUFF
 
-$textreply = $message;
+
 
 ##$n["outboundSMSMessageRequest"]["clientCorrelator"] = "888";
 $outbound["outboundSMSMessageRequest"]["senderAddress"] = "tel:8839";
@@ -35,10 +35,12 @@ $payload = json_encode($outbound);
 #get auth token
 $link = mysqli_connect('localhost','root','rootpower','globesmshandler');
 $query = "SELECT access_token FROM users WHERE subscriber_number=".substr($senderAddress, 7);
-#$authtoken = mysqli_query($link, $query);
+$result = mysqli_query($link, $query);
+$row = mysqli_fetch_assoc($result);
+$authtoken = $row["access_token"];
 
 #$url = "https://devapi.globelabs.com.ph/smsmessaging/v1/outbound/8839/requests?access_token=".$authtoken;
-$url = "https://requestb.in/16v0czb1";#.$authtoken;?access_token=
+$url = "https://requestb.in/16v0czb1?access_token=".$authtoken;
 
 $ch = curl_init($url);
 
