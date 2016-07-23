@@ -38,7 +38,7 @@ if($break[0] == "whereami"){ #BONUS FEATURE, text 'whereami' to get current addr
 	$resolvearray = json_decode($resolvejson, true);
 	$currentloc = $resolvearray["results"][0]["formatted_address"];
 
-	$textreply = "You are at ".$break[0];
+	$textreply = "You are at ".$currentloc;
 
 } else if($break[0] != "KAWAY"){
 	$textreply = "Invalid command. Text KAWAY, space, followed by a waiting shed code.";
