@@ -1,9 +1,9 @@
 <?php
 
 
-$tkn = $_POST["access_token"];
+$tkn = $_GET["access_token"];
 
-$usernum = $_POST["subscriber_number"];
+$usernum = $_GET["subscriber_number"];
 
 $link = mysqli_connect('localhost','root','rootpower','globesmshandler');
 
