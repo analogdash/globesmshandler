@@ -4,8 +4,7 @@ $obj=file_get_contents('php://input');
 
 $value = json_decode($obj,true);
 
-$columns = implode(", ",array_keys($value["inboundSMSMessageList"]));
-$vertices = implode(", ",array_keys($value["inboundSMSMessageList"]["inboundSMSMessage"]));
+$columns = implode(", ",array_keys($value["inboundSMSMessageList"]["inboundSMSMessage"]));
 
 $dateTime = $value["inboundSMSMessageList"]["inboundSMSMessage"]["dateTime"];
 $message = $value["inboundSMSMessage"]["message"];
