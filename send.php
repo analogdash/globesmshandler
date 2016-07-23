@@ -17,6 +17,15 @@ $ch = curl_init($url);
   curl_setopt($ch, CURLOPT_POSTFIELDS,$post);
   curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); 
 $response  = curl_exec($ch);
+
+if($response === false){
+    echo 'Curl error: ' . curl_error($ch);
+}
+else{
+    print_r($response);
+}
+
+
 curl_close($ch);
 
 /*
