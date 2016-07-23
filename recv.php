@@ -12,7 +12,7 @@ $break = explode(" ",$message);
 
 if($break[0] != "KAWAY"){
 	$textreply = "Invalid command. Text KAWAY, space, followed by a waiting shed code.";
-} else if ($break[1]) { #SOME TEST ABOUT VALIDITY OF SHED CODE
+} else if (!$break[1]) { #SOME TEST ABOUT VALIDITY OF SHED CODE
 	$textreply = "Don't forget the shed code.";
 } else if (true) { #SOME TEST ABOUT UNSUCCESSFUL BACK END THING
 	$shedcode = $break[1];
