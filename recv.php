@@ -39,7 +39,7 @@ $result = mysqli_query($link, $query);
 $row = mysqli_fetch_assoc($result);
 $authtoken = $row["access_token"];
 
-$url = "https://devapi.globelabs.com.ph/smsmessaging/v1/outbound/8839/requests?access_token=".$authtoken;
+$url = "https://devapi.globelabs.com.ph/smsmessaging/v1/outbound/9331/requests?access_token=".$authtoken;
 #$url = "https://requestb.in/16v0czb1?access_token=".$authtoken;
 
 $ch = curl_init($url);
