@@ -1,6 +1,6 @@
 <?php
 
-$value = json_decode($_POST['json']);
+$value = json_decode($_POST['json'],true);
 
 
 
