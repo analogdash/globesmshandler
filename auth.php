@@ -15,8 +15,8 @@ if(isset($_GET["access_token"])){
 	mysqli_query($link, $query);
 
 
-} else if (isset($_POST["json"])) {
-	$unsub = json_decode($_POST["json"]);
+} else if (!empty($_POST)){
+	$unsub = json_decode(file_get_contents('php://input'),true);
 	$subnum = $unsub["unsubscribed"]["subscriber_number"];
 
 
