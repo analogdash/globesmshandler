@@ -5,14 +5,40 @@ $value["outboundSMSMessageRequest"]["senderAddress"] = "tel:8839";
 $value["outboundSMSMessageRequest"]["outboundSMSTextMessage"]["message"] = "Hello World";
 $value["outboundSMSMessageRequest"]["Address"][0] = "tel:+639776519749";
 
-$payload = json_encode($value);
+$curl_post_data = json_encode($value);
 
 #$url = "https://devapi.globelabs.com.ph/smsmessaging/v1/outbound/8839/requests?access_token=69PVXqlqgQN5Ww_nd2KcKEnloEI_-Zt0wGLILZFKYBE"
 
 $url = "https://requestb.in/16v0czb1?access_token=69PVXqlqgQN5Ww_nd2KcKEnloEI_-Zt0wGLILZFKYBE"
 
-$ch = curl_init();
+$curl = curl_init($url);
 
+
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($curl, CURLOPT_POST, true);
+curl_setopt($curl, CURLOPT_POSTFIELDS, $curl_post_data);
+
+$curl_response = curl_exec($curl);
+
+if ($curl_response === false) {
+    $info = curl_getinfo($curl);
+    curl_close($curl);
+    die('error occured during curl exec. Additioanl info: ' . var_export($info));
+}
+
+curl_close($curl);
+
+$decoded = json_decode($curl_response);
+
+if (isset($decoded->response->status) && $decoded->response->status == 'ERROR') {
+    die('error occured: ' . $decoded->response->errormessage);
+}
+
+echo 'response ok!<br>';
+
+var_export($decoded->response);
+
+/*
 curl_setopt($ch, CURLOPT_URL, $url); 
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
 curl_setopt($ch, CURLOPT_POSTFIELDS, $payload );                                                             
@@ -33,5 +59,5 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 echo "<pre>$result</pre><br>";
 echo "<pre>$errmsg</pre><br>";
 echo "<pre>$cInfo</pre><br>";
-
+*/
 ?>
