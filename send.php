@@ -7,6 +7,16 @@ $value["outboundSMSMessageRequest"]["Address"][0] = "tel:+639776519749";
 
 $payload = json_encode($value);
 
-echo $payload;
+$url = "https://devapi.globelabs.com.ph/smsmessaging/v1/outbound/8839/requests?access_token=69PVXqlqgQN5Ww_nd2KcKEnloEI_-Zt0wGLILZFKYBE"
+
+$ch = curl_init($url);
+
+curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
+curl_setopt( $ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+$result = curl_exec($ch);
+curl_close($ch);
+
+echo "<pre>$result</pre>";
 
 ?>
