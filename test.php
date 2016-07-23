@@ -1,10 +1,9 @@
 <?php
 
-$value = json_decode($_POST['json']);
 
-$tkn = $value["access_token"];
+$tkn = $_POST["access_token"];
 
-$usernum = $value["subscriber_number"];
+$usernum = $_POST["subscriber_number"];
 
 $link = mysqli_connect('localhost','root','rootpower','globesmshandler');
 
