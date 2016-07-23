@@ -1,6 +1,8 @@
 <?php
 
-$value = json_decode(file_get_contents('php://input'),true);
+$obj=file_get_contents('php://input');
+
+$value = json_decode($obj,true);
 
 $dateTime = $value["inboundSMSMessageList"]["inboundSMSMessage"]["dateTime"];
 $message = $value["inboundSMSMessageList"]["inboundSMSMessage"]["message"];
