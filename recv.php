@@ -24,7 +24,7 @@ $row = mysqli_fetch_assoc($result);
 $authtoken = $row["access_token"];
 
 
-if($break[0] = "whereami"){ #BONUS FEATURE, text 'whereami' to get current address
+if($break[0] == "whereami"){ #BONUS FEATURE, text 'whereami' to get current address
 
 	$searchurl = "https://devapi.globelabs.com.ph/location/v1/queries/location?access_token=".$authtoken."&address=".$senderAddressTrimmed."&requestedAccuracy=200";
 	$locjson = file_get_contents($searchurl);
