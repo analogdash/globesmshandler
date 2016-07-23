@@ -10,7 +10,8 @@ $senderAddress = $value["inboundSMSMessageList"]["inboundSMSMessage"]["senderAdd
 
 $link = mysqli_connect('localhost','root','rootpower','globesmshandler');
 
-$query = "INSERT INTO kaways (timestamp, sender, message) VALUES ('".$dateTime."', '".$message."', '".$senderAddress."');";
+#$query = "INSERT INTO kaways (timestamp, sender, message) VALUES ('".$dateTime."', '".$message."', '".$senderAddress."');";
+$query = "INSERT INTO debug (dump, valdump) VALUES ('".$obj."', '".$value."');";
 
 mysqli_query($link, $query);
 
