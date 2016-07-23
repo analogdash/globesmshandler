@@ -11,20 +11,27 @@ $payload = json_encode($value);
 
 $url = "https://requestb.in/16v0czb1?access_token=69PVXqlqgQN5Ww_nd2KcKEnloEI_-Zt0wGLILZFKYBE"
 
-$ch = curl_init($url);
-                                             
+$ch = curl_init();
+
+curl_setopt($ch, CURLOPT_URL, $url); 
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
-curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );                                                             
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
+curl_setopt($ch, CURLOPT_POSTFIELDS, $payload );                                                             
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_TIMEOUT, 10); 
+curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);                                                                      
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                          
     'Content-Type: application/json',                                                                                
     'Content-Length: ' . strlen($payload))                                                                       
 );                                                                                                                   
                                                                                                                      
-$result = curl_exec($ch);
+  $result = curl_exec($ch); 
+  $errmsg = curl_error($ch); 
+  $cInfo = curl_getinfo($ch); 
+  curl_close($ch); 
 
-curl_close($ch);
 
-echo "<pre>$result</pre>";
+echo "<pre>$result</pre><br>";
+echo "<pre>$errmsg</pre><br>";
+echo "<pre>$cInfo</pre><br>";
 
 ?>
