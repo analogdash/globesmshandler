@@ -2,9 +2,11 @@
 
 $value = json_decode($_POST['json']);
 
-$dateTime = $value["inboundSMSMessageList"]["inboundSMSMessage"]["dateTime"];
-$message = $value["inboundSMSMessageList"]["inboundSMSMessage"]["message"];
-$senderAddress = $value["inboundSMSMessageList"]["inboundSMSMessage"]["senderAddress"];
+
+
+$dateTime = $value["inboundSMSMessageList"]["inboundSMSMessage"][dateTime];
+$message = $value["inboundSMSMessage"]["message"];
+$senderAddress = $value["inboundSMSMessage"][senderAddress];
 
 $link = mysqli_connect('localhost','root','rootpower','globesmshandler');
 
