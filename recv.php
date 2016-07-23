@@ -1,10 +1,10 @@
 <?php
 
-$value = json_decode(file_get_contents('php://input'),true);
+$inbound = json_decode(file_get_contents('php://input'),true);
 
-$dateTime = $value["inboundSMSMessageList"]["inboundSMSMessage"][0]["dateTime"];
-$message = $value["inboundSMSMessageList"]["inboundSMSMessage"][0]["message"];
-$senderAddress = $value["inboundSMSMessageList"]["inboundSMSMessage"][0]["senderAddress"];
+$dateTime = $inbound["inboundSMSMessageList"]["inboundSMSMessage"][0]["dateTime"];
+$message = $inbound["inboundSMSMessageList"]["inboundSMSMessage"][0]["message"];
+$senderAddress = $inbound["inboundSMSMessageList"]["inboundSMSMessage"][0]["senderAddress"];
 
 /*
 
@@ -25,12 +25,12 @@ if($break[0] != "KAWAY"){
 
 $textreply = $message;
 
-##$value["outboundSMSMessageRequest"]["clientCorrelator"] = "888";
-$value["outboundSMSMessageRequest"]["senderAddress"] = "tel:8839";
-$value["outboundSMSMessageRequest"]["outboundSMSTextMessage"]["message"] = $textreply;
-$value["outboundSMSMessageRequest"]["address"][0] = $senderAddress;
+##$n["outboundSMSMessageRequest"]["clientCorrelator"] = "888";
+$outbound["outboundSMSMessageRequest"]["senderAddress"] = "tel:8839";
+$outbound["outboundSMSMessageRequest"]["outboundSMSTextMessage"]["message"] = $textreply;
+$outbound["outboundSMSMessageRequest"]["address"][0] = $senderAddress;
 
-$payload = json_encode($value);
+$payload = json_encode($outbound);
 
 #get auth token
 $link = mysqli_connect('localhost','root','rootpower','globesmshandler');
@@ -52,9 +52,6 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array(
                                                                                                                      
   $result = curl_exec($ch); 
 
-$query = "INSERT INTO kaways (timberr, sender, message) VALUES ('".$dateTime."', '".$senderAddress."', '".$message."');";
-mysqli_query($link, $query);
-mysqli_close();
 
 
 
@@ -66,6 +63,9 @@ mysqli_close();
 
 
 /*
+$query = "INSERT INTO kaways (timberr, sender, message) VALUES ('".$dateTime."', '".$senderAddress."', '".$message."');";
+mysqli_query($link, $query);
+mysqli_close();
 
 */
 
