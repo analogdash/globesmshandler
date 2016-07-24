@@ -42,9 +42,9 @@ if($break[0] == "whereami"){ #BONUS FEATURE, text 'whereami' to get current addr
 
 } else if($break[0] != "KAWAY"){
 	$textreply = "Invalid command. Text KAWAY, space, followed by a waiting shed code.";
-} else if (!$break[1]) { #SOME TEST ABOUT VALIDITY OF SHED CODE
+} else if (!$break[1]) {
 	$textreply = "Don't forget the shed code.";
-} else if (true) { #SOME TEST ABOUT UNSUCCESSFUL BACK END THING
+} else if (true) {
 	$shedcode = $break[1];
 
 
@@ -55,7 +55,7 @@ if($break[0] == "whereami"){ #BONUS FEATURE, text 'whereami' to get current addr
 
 
 
-	if (0/*POST TO BACK END SUCCESS*/){
+	if (0/*POST TO BACK END SUCCESS CHECKER*/){
 			$textreply = "Kawaii! with shed code ".$shedcode;
 	} else {
 		$textreply = "Push to backend failed!";

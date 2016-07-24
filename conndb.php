@@ -9,9 +9,9 @@ $username = "root";
 $password = "rootpower";
 $database = "globesmshandler";
 
-$googMapAPIkey = "AIzaSyBCO1XKQt8S0AO6vebjeK2Uyrf_E27V6RE";
+$googMapAPIkey = "AIzaSyBCO1XKQt8S0AO6vebjeK2Uyrf_E27V6RE"; # Get your own, lol
 
-$fourdigitshortcode = "9331"; #used by Globe API
+$fourdigitshortcode = "9331"; #used by Globe API, also get your own
 
 $link = mysqli_connect($servername,$username,$password,$database);
 
