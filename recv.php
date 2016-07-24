@@ -4,7 +4,7 @@
 ## By Dash Castellano
 ## a single PHP file that does everything because hackathon
 ## activated by sending an SMS to app short code
-$fourdigitshortcode = "9331"; #used by Globe API
+include 'conndb.php';
 
 # Parsing json like C programmer
 $inbound = json_decode(file_get_contents('php://input'),true);
@@ -17,7 +17,7 @@ $senderAddressTrimmed = substr($senderAddress, 7); #removes tel:+63 prefix
 $break = explode(" ",$message);
 
 # Retrieve access_token given subscriber_number
-include 'conndb.php';
+
 $query = "SELECT access_token FROM users WHERE subscriber_number=".$senderAddressTrimmed;
 $result = mysqli_query($link, $query);
 $row = mysqli_fetch_assoc($result);
@@ -33,7 +33,7 @@ if($break[0] == "whereami"){ #BONUS FEATURE, text 'whereami' to get current addr
 	$long = $locarray["terminalLocationList"]["terminalLocation"]["currentLocation"]["longitude"];
 	$lat = $locarray["terminalLocationList"]["terminalLocation"]["currentLocation"]["latitude"];
 
-	$resolveurl = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".$lat.",".$long."&key=AIzaSyBCO1XKQt8S0AO6vebjeK2Uyrf_E27V6RE";
+	$resolveurl = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".$lat.",".$long."&key=".$googMapAPIkey;
 	$resolvejson = file_get_contents($resolveurl);
 	$resolvearray = json_decode($resolvejson, true);
 	$currentloc = $resolvearray["results"][0]["formatted_address"];

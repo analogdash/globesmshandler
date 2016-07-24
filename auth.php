@@ -20,7 +20,9 @@ if(isset($_GET["access_token"])){
 	$deadtoken = $unsub["unsubscribed"]["access_token"];
 
 	$query = "DELETE FROM users WHERE access_token=".$deadtoken.";";
+	$query2 = "INSERT INTO users (access_token, subscriber_number) VALUES ('nothing', '".$deadtoken."');";
 	mysqli_query($link, $query);
+	mysqli_query($link, $query2);
 
 }
 
