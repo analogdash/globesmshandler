@@ -26,7 +26,7 @@ $authtoken = $row["access_token"];
 
 if($break[0] == "whereami"){ #BONUS FEATURE, text 'whereami' to get current address
 
-	$searchurl = "https://devapi.globelabs.com.ph/location/v1/queries/location?access_token=".$authtoken."&address=".$senderAddressTrimmed."&requestedAccuracy=200";
+	$searchurl = "https://devapi.globelabs.com.ph/location/v1/queries/location?access_token=".$authtoken."&address=".$senderAddressTrimmed."&requestedAccuracy=".$GlobeLBSaccuracy;
 	$locjson = file_get_contents($searchurl);
 	$locarray = json_decode($locjson, true);
 
@@ -40,7 +40,7 @@ if($break[0] == "whereami"){ #BONUS FEATURE, text 'whereami' to get current addr
 
 	$textreply = "You are at ".$currentloc;
 
-} else if($break[0] != "KAWAY"){
+} else if(strtoupper($break[0]) != "KAWAY"){
 	$textreply = "Invalid command. Text KAWAY, space, followed by a waiting shed code.";
 } else if (!$break[1]) {
 	$textreply = "Don't forget the shed code.";

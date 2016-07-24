@@ -9,6 +9,8 @@ $username = "root";
 $password = "rootpower";
 $database = "globesmshandler";
 
+$GlobeLBSaccuracy = "200"; #location finding precision in meters. Lower = more precision, longer load time
+
 $googMapAPIkey = "AIzaSyBCO1XKQt8S0AO6vebjeK2Uyrf_E27V6RE"; # Get your own, lol
 
 $fourdigitshortcode = "9331"; #used by Globe API, also get your own
