@@ -66,7 +66,7 @@ if($break[0] == "whereami"){ #BONUS FEATURE, text 'whereami' to get current addr
 
 # Writing JSON like a C programmer
 #$n["outboundSMSMessageRequest"]["clientCorrelator"] = ""; #this is for retrying a PUSH without sending the message twice
-$outbound["outboundSMSMessageRequest"]["senderAddress"] = "tel:8839";
+$outbound["outboundSMSMessageRequest"]["senderAddress"] = "tel:".$fourdigitshortcode;
 $outbound["outboundSMSMessageRequest"]["outboundSMSTextMessage"]["message"] = $textreply;
 $outbound["outboundSMSMessageRequest"]["address"][0] = $senderAddress;
 
