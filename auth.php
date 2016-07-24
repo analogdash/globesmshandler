@@ -17,12 +17,10 @@ if(isset($_GET["access_token"])){
 
 } else { #ADD CONDITION
 	$unsub = json_decode(file_get_contents('php://input'),true);
-	$deadtoken = $unsub["unsubscribed"]["access_token"];
+	$deadnumber = $unsub["unsubscribed"]["subscriber_number"]; #it would be better to delete by token, fix for production
 
-	$query = "DELETE FROM users WHERE access_token=".$deadtoken.";";
-	$query2 = "INSERT INTO users (access_token, subscriber_number) VALUES ('nothing', '".$deadtoken."');";
+	$query = "DELETE FROM users WHERE subscriber_number='".$deadnumber."';";
 	mysqli_query($link, $query);
-	mysqli_query($link, $query2);
 
 }
 
